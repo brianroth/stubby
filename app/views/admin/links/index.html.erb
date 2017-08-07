@@ -1,0 +1,27 @@
+<h1 class="page-header">Links</h1>
+<p id="notice"><%= notice %></p>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Slug</th>
+        <th>Url</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @links.each do |link| %>
+      <tr>
+        <td><%= link.slug %></td>
+        <td><%= link.url %></td>
+        <td><%= link_to 'Edit', edit_admin_link_path(link) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'New Link', new_admin_link_path, class: "btn btn-md btn-primary" %>

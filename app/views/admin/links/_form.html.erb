@@ -1,0 +1,25 @@
+<%= form_with(model: link, url: url, local: true) do |form| %>
+  <% if link.errors.any? %>
+    <div class="form-group has-danger">
+      <%= form.text_field :url, class: "form-control form-control-danger"%>
+      <div class="form-control-feedback">
+        <%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:
+        <ul>
+        <% link.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+
+  <% else %>
+    <div class="form-group">
+      <%= form.text_field :url, class: "form-control", placeholder: "Enter URL"%>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit(class: "btn btn-md btn-primary") %>
+    <%= link_to 'Cancel', admin_links_path, class: "btn btn-md btn-primary" %>
+  </div>
+<% end %>
