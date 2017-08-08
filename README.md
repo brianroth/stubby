@@ -1,5 +1,9 @@
 # README
 
+## Install Docker
+
+[Install Docker version 1.13 or higher.](https://docs.docker.com/engine/installation/)
+
 ## To start the application
 
 Build the application and it's containers
