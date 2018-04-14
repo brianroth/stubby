@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807012918) do
+ActiveRecord::Schema.define(version: 2017_08_07_012918) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "links", force: :cascade do |t|
+  create_table "links", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.string "url", limit: 1024, null: false
     t.datetime "created_at", null: false

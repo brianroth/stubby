@@ -12,15 +12,19 @@ Build the application and it's containers
 
 Create the database
 
-```docker-compose run web rake db:create```
+```docker-compose run app rake db:create```
 
 Run database migrations
 
-```docker-compose run -e "RAILS_ENV=development" web rake db:migrate```
+```docker-compose run -e "RAILS_ENV=development" app rake db:migrate```
 
-Start the application
+Start the application (daemonized)
 
-```docker-compose up -d```
+```docker-compose up --build -d```
+
+Stop the application
+
+```docker-compose down```
 
 ## Running tests
 
@@ -30,7 +34,7 @@ Build the application and it's containers
 
 Run the test suite
 
-```docker-compose run web rspec```
+```docker-compose run app rspec```
 
 ## Debugging with pry
 

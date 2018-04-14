@@ -13,7 +13,7 @@ class Link < ApplicationRecord
   private
 
   def generate_slug
-    self.slug = id.to_s(36)
+    self.slug = (10000+id).to_s(36)
     save
   end
 end

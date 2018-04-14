@@ -1,25 +1,49 @@
 version: '3'
 services:
-  db:
-    image: postgres
+  mysql:
+    image: mysql:5.7.21
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
     volumes:
-      - stubby-postgres:/var/lib/postgresql/data
+      - mysql-data:/var/lib/mysql
   redis:
-    image: redis
+    image: redis:alpine
     volumes:
-      - stubby-redis:/var/lib/redis/data
-  web:
+      - redis-data:/var/lib/redis
+  app:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - .:/stubby
+      - .:/app
+      - bundle:/bundle
+    environment:
+      RAILS_ENV: development
     stdin_open: true
     tty: true
     ports:
       - "3000:3000"
-    depends_on:
-      - db
+    env_file:
+      - .env
+    links:
+      - mysql
       - redis
+  sidekiq:
+    depends_on:
+      - 'mysql'
+      - 'redis'
+    build: .
+    volumes:
+      - .:/app
+      - bundle:/bundle
+    command: sidekiq -C config/sidekiq.yml
+    env_file:
+      - .env
 volumes:
-  stubby-postgres:
-  stubby-redis:
+  mysql-data:
+    driver: local
+  redis-data:
+    driver: local
+  bundle:
+    driver: local

@@ -1,21 +1,22 @@
 source 'https://rubygems.org'
+ruby '2.4.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.3'
-gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
+gem 'rails', '~> 5.2.0'
+gem 'mysql2'
+gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'redis', '~> 3.0'
 gem 'bootstrap'
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'sidekiq-unique-jobs'
+gem 'sinatra', require: nil
 
 group :development, :test do
-  gem 'pry-byebug'
-  gem 'byebug'
-  gem 'rspec-rails', '~> 3.5'
-  gem 'rubocop', require: false
-  gem 'factory_girl'
-  gem 'faker'
+  gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :development do
