@@ -17,7 +17,6 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/app
-      - bundle:/bundle
     environment:
       RAILS_ENV: development
     stdin_open: true
@@ -30,16 +29,17 @@ services:
       - mysql
       - redis
   sidekiq:
-    depends_on:
-      - 'mysql'
-      - 'redis'
     build: .
+    command: sidekiq -C config/sidekiq.yml
     volumes:
       - .:/app
-      - bundle:/bundle
-    command: sidekiq -C config/sidekiq.yml
+    environment:
+      RAILS_ENV: development
     env_file:
       - .env
+    links:
+      - 'mysql'
+      - 'redis'
 volumes:
   mysql-data:
     driver: local
